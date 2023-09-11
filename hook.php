@@ -32,6 +32,20 @@
 function plugin_restrict_reservations_check_reservation(CommonDBTM $item)
 {
     global $CFG_GLPI;
+    // Convert date strings to DateTime objects
+    $beginDate = new DateTime($item->input["begin"]);
+    $endDate = new DateTime($item->input["end"]);
+
+    // Calculate the difference in days
+    $interval = $beginDate->diff($endDate);
+    $daysDifference = $interval->days;
+
+    // Check if the difference is less than or equal to 30 days
+    if ($daysDifference > 30) {
+        $item->input = false;
+        Html::displayErrorAndDie("We have limited the maximum reservation length to 30 Days to ensure that assets are actively used. Please contact the GLPI administrators if you have any feedback.");
+    }
+
     // Get the reservation item ID
     $reservationitems_id = $item->input["reservationitems_id"];
 
