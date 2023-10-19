@@ -47,8 +47,8 @@ function plugin_init_restrict_reservations()
     global $PLUGIN_HOOKS;
 
     $PLUGIN_HOOKS['csrf_compliant']['restrict_reservations'] = true;
-    $PLUGIN_HOOKS['pre_item_add']['restrict_reservations'] = ["Reservation" => 'plugin_restrict_reservations_check_reservation'];
-    $PLUGIN_HOOKS['pre_item_update']['restrict_reservations'] = ["Reservation" => 'plugin_restrict_reservations_check_reservation'];
+    $PLUGIN_HOOKS['pre_item_add']['restrict_reservations'] = ["Reservation" => 'plugin_restrict_reservations_check_reservation_add'];
+    $PLUGIN_HOOKS['pre_item_update']['restrict_reservations'] = ["Reservation" => 'plugin_restrict_reservations_check_reservation_update'];
 }
 
 /**

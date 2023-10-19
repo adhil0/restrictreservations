@@ -29,7 +29,70 @@
  * --------------------------------------------------------------------------
  */
 
-function plugin_restrict_reservations_check_reservation(CommonDBTM $item)
+function plugin_restrict_reservations_check_reservation_update(CommonDBTM $item)
+{
+    global $CFG_GLPI;
+
+    // Convert date strings to DateTime objects
+    $beginDate = new DateTime($item->input["begin"]);
+    $endDate = new DateTime($item->input["end"]);
+
+    // Calculate the difference in days
+    $interval = $beginDate->diff($endDate);
+    $daysDifference = $interval->days;
+
+    // Check if the difference is less than or equal to 30 days
+    if ($daysDifference > 30) {
+        Session::addMessageAfterRedirect(
+            __('Your reservation is too long. We have limited the maximum reservation length to 30 Days to ensure that assets are actively used. Please contact the GLPI administrators if you have any feedback.'),
+            false,
+            ERROR
+        );
+        $item->input = false;
+        return $item;
+    }
+
+    // Get the reservation item ID
+    $reservationitems_id = $item->fields["reservationitems_id"];
+
+    // Get the ID of the currently logged-in user
+    $currentUserID = Session::getLoginUserID();
+
+    // Get group & ancestor groups of asset
+    $reservationItem = new ReservationItem();
+    $reservationItem->getFromDB($reservationitems_id);
+    $asset = new $reservationItem->fields["itemtype"]();
+    $asset->getFromDB($reservationItem->fields["items_id"]);
+    $assetGroup = $asset->fields['groups_id'];
+    $ancestor_groups = getAncestorsOf("glpi_groups", $assetGroup);
+
+    $canReserve = false;
+    if (Group_User::isUserInGroup($currentUserID, $assetGroup)) {
+        // Check if the current user is in the asset's group
+        $canReserve = true;
+    } elseif (!empty($ancestor_groups)) {
+        // Check if the current user is in any of the ancestor groups
+        foreach ($ancestor_groups as $group) {
+            if (Group_User::isUserInGroup($currentUserID, $group)) {
+                $canReserve = true;
+                break;
+            }
+        }
+    }
+
+    // If the user is not allowed to reserve the asset, display an error message
+    if (!$canReserve) {
+        Session::addMessageAfterRedirect(
+            __("You do not belong to the appropriate group to reserve this machine. You need to either be in the same group as the requested asset, or in an ancestor group of the asset. You can check your groups here: https://{$_SERVER['HTTP_HOST']}/front/user.form.php?id=$currentUserID&forcetab=Group_User$1. If you are in the correct groups, but would still like to reserve this asset, please ask someone in the relevant group to reserve it on your behalf. If you are not in the correct group, please contact your manager or the GLPI admins."),
+            false,
+            ERROR
+        );
+        $item->input = false;
+    }
+    return $item;
+}
+
+function plugin_restrict_reservations_check_reservation_add(CommonDBTM $item)
 {
     global $CFG_GLPI;
     // Convert date strings to DateTime objects
@@ -42,8 +105,13 @@ function plugin_restrict_reservations_check_reservation(CommonDBTM $item)
 
     // Check if the difference is less than or equal to 30 days
     if ($daysDifference > 30) {
+        Session::addMessageAfterRedirect(
+            __('Your reservation is too long. We have limited the maximum reservation length to 30 Days to ensure that assets are actively used. Please contact the GLPI administrators if you have any feedback.'),
+            false,
+            ERROR
+        );
         $item->input = false;
-        Html::displayErrorAndDie("We have limited the maximum reservation length to 30 Days to ensure that assets are actively used. Please contact the GLPI administrators if you have any feedback.");
+        return $item;
     }
 
     // Get the reservation item ID
@@ -76,12 +144,16 @@ function plugin_restrict_reservations_check_reservation(CommonDBTM $item)
 
     if (!$canReserve) {
         // If the user is not allowed to reserve the asset, display an error message
+        Session::addMessageAfterRedirect(
+            __("You do not belong to the appropriate group to reserve this machine. You need to either be in the same group as the requested asset, or in an ancestor group of the asset. You can check your groups here: https://{$_SERVER['HTTP_HOST']}/front/user.form.php?id=$currentUserID&forcetab=Group_User$1. If you are in the correct groups, but would still like to reserve this asset, please ask someone in the relevant group to reserve it on your behalf. If you are not in the correct group, please contact your manager or the GLPI admins."),
+            false,
+            ERROR
+        );
         $item->input = false;
-        Html::displayErrorAndDie("You do not belong to the appropriate group to reserve this machine. You need to either be in the same group as the requested asset, or in an ancestor group of the asset. You can check your groups here: https://{$_SERVER['HTTP_HOST']}/front/user.form.php?id=$currentUserID&forcetab=Group_User$1. If you are in the correct groups, but would still like to reserve this asset, please ask someone in the relevant group to reserve it on your behalf. If you are not in the correct group, please contact your manager or the GLPI admins.");
     }
-
     return $item;
 }
+
 /**
  * Plugin install process
  *
