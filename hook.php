@@ -2,8 +2,8 @@
 
 /**
  * -------------------------------------------------------------------------
- * restrict_reservations plugin for GLPI
- * Copyright (C) 2023 by the restrict_reservations Development Team.
+ * restrictreservations plugin for GLPI
+ * Copyright (C) 2023 by the restrictreservations Development Team.
  * -------------------------------------------------------------------------
  *
  * MIT License
@@ -29,7 +29,7 @@
  * --------------------------------------------------------------------------
  */
 
-function plugin_restrict_reservations_check_reservation_update(CommonDBTM $item)
+function plugin_restrictreservations_check_reservation_update(CommonDBTM $item)
 {
     global $CFG_GLPI;
 
@@ -92,7 +92,7 @@ function plugin_restrict_reservations_check_reservation_update(CommonDBTM $item)
     return $item;
 }
 
-function plugin_restrict_reservations_check_reservation_add(CommonDBTM $item)
+function plugin_restrictreservations_check_reservation_add(CommonDBTM $item)
 {
     global $CFG_GLPI;
     // Convert date strings to DateTime objects
@@ -159,7 +159,7 @@ function plugin_restrict_reservations_check_reservation_add(CommonDBTM $item)
  *
  * @return boolean
  */
-function plugin_restrict_reservations_install()
+function plugin_restrictreservations_install()
 {
     return true;
 }
@@ -169,7 +169,7 @@ function plugin_restrict_reservations_install()
  *
  * @return boolean
  */
-function plugin_restrict_reservations_uninstall()
+function plugin_restrictreservations_uninstall()
 {
     return true;
 }

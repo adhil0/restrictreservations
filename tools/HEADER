@@ -1,5 +1,5 @@
 -------------------------------------------------------------------------
-restrict_reservations plugin for GLPI
+restrictreservations plugin for GLPI
 -------------------------------------------------------------------------
 
 MIT License
@@ -22,7 +22,7 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 -------------------------------------------------------------------------
-@copyright Copyright (C) 2023 by the restrict_reservations plugin team.
+@copyright Copyright (C) 2023 by the restrictreservations plugin team.
 @license   MIT https://opensource.org/licenses/mit-license.php
-@link      https://github.com/pluginsGLPI/restrict_reservations
+@link      https://github.com/pluginsGLPI/restrictreservations
 -------------------------------------------------------------------------

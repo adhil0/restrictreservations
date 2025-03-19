@@ -1,28 +1,28 @@
 <root>
-   <name>restrict_reservations</name>
-   <key>restrict_reservations</key>
+   <name>restrictreservations</name>
+   <key>restrictreservations</key>
    <!-- stable, beta, development, alpha, ... -->
    <state>stable</state>
-   <logo>https://raw.githubusercontent.com/pluginsGLPI/restrict_reservations/master/{LNAME}.png</logo>
+   <logo>https://raw.githubusercontent.com/pluginsGLPI/restrictreservations/master/{LNAME}.png</logo>
    <description>
       <short>
          <!-- Add as many lang tag you want -->
-         <en>restrict_reservations GLPI plugin.</en>
-         <fr>Plugin GLPI restrict_reservations</fr>
+         <en>restrictreservations GLPI plugin.</en>
+         <fr>Plugin GLPI restrictreservations</fr>
       </short>
       <long>
          <!-- Add as many lang tag you want -->
-         <en>A long description for restrict_reservations GLPI plugin.</en>
-         <fr>Un description longue pour le plugin GLPI restrict_reservations</fr>
+         <en>A long description for restrictreservations GLPI plugin.</en>
+         <fr>Un description longue pour le plugin GLPI restrictreservations</fr>
       </long>
    </description>
-   <homepage>https://github.com/pluginsGLPI/restrict_reservations</homepage>
-   <download>https://github.com/pluginsGLPI/restrict_reservations/releases</download>
-   <issues>https://github.com/pluginsGLPI/restrict_reservations/issues</issues>
-   <readme>https://github.com/pluginsGLPI/restrict_reservations/blob/master/README.md</readme>
+   <homepage>https://github.com/pluginsGLPI/restrictreservations</homepage>
+   <download>https://github.com/pluginsGLPI/restrictreservations/releases</download>
+   <issues>https://github.com/pluginsGLPI/restrictreservations/issues</issues>
+   <readme>https://github.com/pluginsGLPI/restrictreservations/blob/master/README.md</readme>
    <authors>
       <!-- Add as many author tag you want -->
-      <author>restrict_reservations</author>
+      <author>restrictreservations</author>
    </authors>
    <versions>
       <!-- Add as many version tag you want -->

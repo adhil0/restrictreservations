@@ -2,8 +2,8 @@
 
 /**
  * -------------------------------------------------------------------------
- * restrict_reservations plugin for GLPI
- * Copyright (C) 2023 by the restrict_reservations Development Team.
+ * restrictreservations plugin for GLPI
+ * Copyright (C) 2023 by the restrictreservations Development Team.
  * -------------------------------------------------------------------------
  *
  * MIT License
@@ -29,12 +29,12 @@
  * --------------------------------------------------------------------------
  */
 
-define('PLUGIN_restrict_reservations_VERSION', '0.0.1');
+define('PLUGIN_restrictreservations_VERSION', '0.0.1');
 
 // Minimal GLPI version, inclusive
-define("PLUGIN_restrict_reservations_MIN_GLPI_VERSION", "10.0.0");
+define("PLUGIN_restrictreservations_MIN_GLPI_VERSION", "10.0.0");
 // Maximum GLPI version, exclusive
-define("PLUGIN_restrict_reservations_MAX_GLPI_VERSION", "10.0.99");
+define("PLUGIN_restrictreservations_MAX_GLPI_VERSION", "10.0.99");
 
 /**
  * Init hooks of the plugin.
@@ -42,13 +42,13 @@ define("PLUGIN_restrict_reservations_MAX_GLPI_VERSION", "10.0.99");
  *
  * @return void
  */
-function plugin_init_restrict_reservations()
+function plugin_init_restrictreservations()
 {
     global $PLUGIN_HOOKS;
 
-    $PLUGIN_HOOKS['csrf_compliant']['restrict_reservations'] = true;
-    $PLUGIN_HOOKS['pre_item_add']['restrict_reservations'] = ["Reservation" => 'plugin_restrict_reservations_check_reservation_add'];
-    $PLUGIN_HOOKS['pre_item_update']['restrict_reservations'] = ["Reservation" => 'plugin_restrict_reservations_check_reservation_update'];
+    $PLUGIN_HOOKS['csrf_compliant']['restrictreservations'] = true;
+    $PLUGIN_HOOKS['pre_item_add']['restrictreservations'] = ["Reservation" => 'plugin_restrictreservations_check_reservation_add'];
+    $PLUGIN_HOOKS['pre_item_update']['restrictreservations'] = ["Reservation" => 'plugin_restrictreservations_check_reservation_update'];
 }
 
 /**
@@ -57,18 +57,18 @@ function plugin_init_restrict_reservations()
  *
  * @return array
  */
-function plugin_version_restrict_reservations()
+function plugin_version_restrictreservations()
 {
     return [
-        'name' => 'restrict_reservations',
-        'version' => PLUGIN_restrict_reservations_VERSION,
+        'name' => 'restrictreservations',
+        'version' => PLUGIN_restrictreservations_VERSION,
         'author' => '<a href="http://www.teclib.com">Teclib\'</a>',
         'license' => '',
         'homepage' => '',
         'requirements' => [
             'glpi' => [
-                'min' => PLUGIN_restrict_reservations_MIN_GLPI_VERSION,
-                'max' => PLUGIN_restrict_reservations_MAX_GLPI_VERSION,
+                'min' => PLUGIN_restrictreservations_MIN_GLPI_VERSION,
+                'max' => PLUGIN_restrictreservations_MAX_GLPI_VERSION,
             ],
         ],
     ];
@@ -80,7 +80,7 @@ function plugin_version_restrict_reservations()
  *
  * @return boolean
  */
-function plugin_restrict_reservations_check_prerequisites()
+function plugin_restrictreservations_check_prerequisites()
 {
     return true;
 }
@@ -92,14 +92,14 @@ function plugin_restrict_reservations_check_prerequisites()
  *
  * @return boolean
  */
-function plugin_restrict_reservations_check_config($verbose = false)
+function plugin_restrictreservations_check_config($verbose = false)
 {
     if (true) { // Your configuration check
         return true;
     }
 
     if ($verbose) {
-        echo __('Installed / not configured', 'restrict_reservations');
+        echo __('Installed / not configured', 'restrictreservations');
     }
     return false;
 }

@@ -1,4 +1,4 @@
-# restrict_reservations GLPI plugin
+# restrictreservations GLPI plugin
 
 This plugin blocks users from reserving assets that don't belong to the same/descendant group.
 
