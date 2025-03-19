@@ -41,10 +41,10 @@ function plugin_restrictreservations_check_reservation_update(CommonDBTM $item)
     $interval = $beginDate->diff($endDate);
     $daysDifference = $interval->days;
 
-    // Check if the difference is less than or equal to 30 days
-    if ($daysDifference > 30) {
+    // Check if the difference is less than or equal to 31 days
+    if ($daysDifference > 31) {
         Session::addMessageAfterRedirect(
-            __('Your reservation is too long. We have limited the maximum reservation length to 30 Days to ensure that assets are actively used. Please contact the GLPI administrators if you have any feedback.'),
+            __('Your reservation is too long. We have limited the maximum reservation length to 31 Days to ensure that assets are actively used. Please contact the GLPI administrators if you have any feedback.'),
             false,
             ERROR
         );
@@ -103,10 +103,10 @@ function plugin_restrictreservations_check_reservation_add(CommonDBTM $item)
     $interval = $beginDate->diff($endDate);
     $daysDifference = $interval->days;
 
-    // Check if the difference is less than or equal to 30 days
-    if ($daysDifference > 30) {
+    // Check if the difference is less than or equal to 31 days
+    if ($daysDifference > 31) {
         Session::addMessageAfterRedirect(
-            __('Your reservation is too long. We have limited the maximum reservation length to 30 Days to ensure that assets are actively used. Please contact the GLPI administrators if you have any feedback.'),
+            __('Your reservation is too long. We have limited the maximum reservation length to 31 Days to ensure that assets are actively used. Please contact the GLPI administrators if you have any feedback.'),
             false,
             ERROR
         );
